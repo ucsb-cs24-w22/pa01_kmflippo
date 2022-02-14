@@ -1,4 +1,9 @@
 //cards.cpp
-//Authors: Your name and your partner's name
+//Authors: Kelly Flippo
 //Implementation of the classes defined in cards.h
 
+#include "cards.h"
+#include "utility.h"
+#include <iostream>
+
+using std::cout;
