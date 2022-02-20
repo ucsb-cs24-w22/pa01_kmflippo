@@ -7,15 +7,15 @@ using namespace std;
 class VirtualCard {
     public:
         VirtualCard();                          // constructor
-        VirtualCard(char mySuit, int myVal);  // overloaded constructor
+        VirtualCard(string mySuit, int myVal);  // overloaded constructor
         ~VirtualCard();                         // destructor
 
-        char getSuit();
+        string getSuit();
         int getValue();
         
 
     private:
-        char suit;
+        string suit;
         int value;
 };
 

@@ -3,14 +3,9 @@
 #include <iostream>
 using namespace std;
 
-VirtualCard::VirtualCard() : suit("h"), value(1) { }
+VirtualCard::VirtualCard(string mySuit = 'h', int myVal = 1) : suit(mySuit), value(myVal) { }
 
-VirtualCard::VirtualCard(string mySuit, int myVal) { 
-    suit = mySuit;
-    value = myVal;
-}
-
-char VirtualCard::getSuit() {
+string VirtualCard::getSuit() {
     return suit;
 }
 
