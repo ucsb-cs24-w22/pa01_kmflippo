@@ -18,6 +18,7 @@ class VirtualCard {
         
     private:
         string suit;
+        string charVal;
         int value;
         
 };

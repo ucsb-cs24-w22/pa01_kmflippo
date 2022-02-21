@@ -13,6 +13,8 @@ using namespace std;
 int main() {
 
     CardBST bst1, bst2;
+
+    //testing opening the file
     ifstream myfile;
     myfile.open("a0.txt");
     
@@ -21,14 +23,33 @@ int main() {
     }
 
     myfile.close();
+    cout << " file is closed " << endl << endl;
 
-    // testing one insertion into BST
-    bst1.insert("h", 1);
+    // testing insertion into BST
     bst1.insert("h", 2);
     bst1.insert("c", 8);
     bst1.insert("d", 7);
     bst1.insert("d", 3);
+    bst1.insert("c", 4);
+    bst1.insert("s", 5);
+    bst1.insert("h", 4);
+    bst1.insert("s", 8);
+    bst1.insert("h", 6);
+    bst1.insert("c", 9);
+    bst1.insert("s", 10);
 
+    // pre order, in order, and post order
+    cout << "Pre Order: ";
+    bst1.printPreOrder();
+    cout << endl;
+    cout << "In Order: ";
+    bst1.printInOrder();
+    cout << endl;
+    cout << "Post Order: ";
+    bst1.printPostOrder();
+    cout << endl;
 
+    //test count
+    cout << endl << "count: " << bst1.count() << endl;
     return 0;
 }

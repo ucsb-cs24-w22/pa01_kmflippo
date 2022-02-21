@@ -98,157 +98,157 @@ bool CardBST::insert(VirtualCard vCard, Node *n) {
 }
 
 
-// // print tree data pre-order
-// void CardBST::printPreOrder() const {
-//     printPreOrder(root);
-// }
+// print tree data pre-order
+void CardBST::printPreOrder() const {
+    printPreOrder(root);
+}
 
-// // recursive helper for printPreOrder()
-// void CardBST::printPreOrder(Node *n) const {
-//     if (n) {
-// 	cout << n->nCard << " ";
-// 	printPreOrder(n->left);
-// 	printPreOrder(n->right);
-//     }
-// }
+// recursive helper for printPreOrder()
+void CardBST::printPreOrder(Node *n) const {
+    if (n) {
+	cout << n->nCard.getSuit() << n->nCard.getValue() << " ";
+	printPreOrder(n->left);
+	printPreOrder(n->right);
+    }
+}
 
-// // print tree data in-order, with helper
-// void CardBST::printInOrder() const {
-//     printInOrder(root);
-// }
+// print tree data in-order, with helper
+void CardBST::printInOrder() const {
+    printInOrder(root);
+}
 
-// void CardBST::printInOrder(Node *n) const {
-//     // IMPLEMENT HERE
-//     if (n) {
-//         printInOrder(n->left);
-//         cout << n->nCard << " ";
-//         printInOrder(n->right);
-//     }
-// }
+void CardBST::printInOrder(Node *n) const {
+    // IMPLEMENT HERE
+    if (n) {
+        printInOrder(n->left);
+        cout << n->nCard.getSuit() << n->nCard.getValue() << " ";
+        printInOrder(n->right);
+    }
+}
 
-// // prints tree data post-order, with helper
-// void CardBST::printPostOrder() const {
-//     printPostOrder(root);
-// }
+// prints tree data post-order, with helper
+void CardBST::printPostOrder() const {
+    printPostOrder(root);
+}
 
-// void CardBST::printPostOrder(Node *n) const {
-//     // IMPLEMENT HERE
-//     if (n) {
-//         printPostOrder(n->left);
-//         printPostOrder(n->right);
-//         cout << n->nCard << " ";
-//     }
-// }
+void CardBST::printPostOrder(Node *n) const {
+    // IMPLEMENT HERE
+    if (n) {
+        printPostOrder(n->left);
+        printPostOrder(n->right);
+        cout << n->nCard.getSuit() << n->nCard.getValue() << " ";
+    }
+}
 
-// // return count of values
-// int CardBST::count() const {
-//     return count(root);
-// }
+// return count of values
+int CardBST::count() const {
+    return count(root);
+}
 
-// // recursive helper for count
-// int CardBST::count(Node *n) const {
-//     if (!root){
-//         return 0;
-//     }
-//     if (!(n->left) && !(n->right)){
-//         return 1;
-//     } else if (n->left && n->right){
-//         return 1 + count(n->left) + count(n->right);
-//     } else if (n->left){
-//         return 1 + count(n->left);
-//     } else {
-//         return 1 + count(n->right);
-//     }
-// }
+// recursive helper for count
+int CardBST::count(Node *n) const {
+    if (!root){
+        return 0;
+    }
+    if (!(n->left) && !(n->right)){
+        return 1;
+    } else if (n->left && n->right){
+        return 1 + count(n->left) + count(n->right);
+    } else if (n->left){
+        return 1 + count(n->left);
+    } else {
+        return 1 + count(n->right);
+    }
+}
 
-// // IMPLEMENT THIS FIRST: returns the node for a given value or NULL if none exists
-// // Parameters:
-// // int value: the value to be found
-// // Node* n: the node to start with (for a recursive call)
-// // Whenever you call this method from somewhere else, pass it
-// // the root node as "n"
-// CardBST::Node* CardBST::getNodeFor(VirtualCard vCard, Node* n) const{
+// IMPLEMENT THIS FIRST: returns the node for a given value or NULL if none exists
+// Parameters:
+// int value: the value to be found
+// Node* n: the node to start with (for a recursive call)
+// Whenever you call this method from somewhere else, pass it
+// the root node as "n"
+CardBST::Node* CardBST::getNodeFor(VirtualCard vCard, Node* n) const{
     
-//     if (!n){
-//         return nullptr;
-//     }
+    if (!n){
+        return nullptr;
+    }
 
 
-//     // basecase: at correct node
-//     if (n->nCard == vCard){
-//             return n;
-//     } 
+    // basecase: at correct node
+    if (n->nCard == vCard){
+            return n;
+    } 
     
-//     // case1 val < n
-//     if (vCard < n->nCard){
-//         return getNodeFor(vCard, n->left);
-//     } 
+    // case1 val < n
+    if (vCard < n->nCard){
+        return getNodeFor(vCard, n->left);
+    } 
 
-//     // case2 val > n   (value > n->info)
-//     else{
-//         return getNodeFor(vCard, n->right);
-//     } 
+    // case2 val > n   (value > n->info)
+    else{
+        return getNodeFor(vCard, n->right);
+    } 
 
-// }
+}
 
-// // returns true if value is in the tree; false if not
-// bool CardBST::contains(VirtualCard vCard) const {
-//     Node* valNode = getNodeFor(vCard, root);
-//     if (valNode == nullptr) {
-//         return false;
-//     }
-//     return true;
-// }
+// returns true if value is in the tree; false if not
+bool CardBST::contains(VirtualCard vCard) const {
+    Node* valNode = getNodeFor(vCard, root);
+    if (valNode == nullptr) {
+        return false;
+    }
+    return true;
+}
 
-// // returns the Node containing the predecessor of the given value
-// CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
-//     // basecase root is null
+// returns the Node containing the predecessor of the given value
+CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
+    // basecase root is null
     
-//     if (!root) {
-//         return NULL;
-//     }
+    if (!root) {
+        return NULL;
+    }
     
-//     if (root->left){
-//         Node* lefttest = root->left;
-//         while (lefttest->left){
-//             lefttest = lefttest->left;
-//         } 
-//         if (lefttest->nCard == vCard){
-//             return nullptr;
-//         }
-//     }
+    if (root->left){
+        Node* lefttest = root->left;
+        while (lefttest->left){
+            lefttest = lefttest->left;
+        } 
+        if (lefttest->nCard == vCard){
+            return nullptr;
+        }
+    }
 
-//     // find key
-//     Node* valNode = getNodeFor(vCard, root);
-//     // case 1: has a left subtree, return rightmost child of left subtree
-//     if (valNode->left) {
-//         Node* p = valNode->left;
-//         while (p->right) {
-//             p = p->right;
-//         }
-//         return p;
-//     }
+    // find key
+    Node* valNode = getNodeFor(vCard, root);
+    // case 1: has a left subtree, return rightmost child of left subtree
+    if (valNode->left) {
+        Node* p = valNode->left;
+        while (p->right) {
+            p = p->right;
+        }
+        return p;
+    }
 
-//     // case 2: has left child - left tree leftmost
-//     if (valNode->left){
-//         Node* temp = valNode->left;
-//         while (temp->right){
-//             temp = temp->right;
-//         }
-//         return temp;
-//     }
+    // case 2: has left child - left tree leftmost
+    if (valNode->left){
+        Node* temp = valNode->left;
+        while (temp->right){
+            temp = temp->right;
+        }
+        return temp;
+    }
 
-//     // case 3: no right child - up the ancestors until you find ancestor > value
-//     if (!valNode->left) {
-//         Node* temp = valNode->parent;
-//         while (temp->nCard > vCard && temp != root) {
-//             temp = temp->parent;
-//         }
-//         return temp;
-//     }
+    // case 3: no right child - up the ancestors until you find ancestor > value
+    if (!valNode->left) {
+        Node* temp = valNode->parent;
+        while (temp->nCard > vCard && temp != root) {
+            temp = temp->parent;
+        }
+        return temp;
+    }
 
-//     return nullptr;
-// }
+    return nullptr;
+}
 
 // // returns the predecessor value of the given value or 0 if there is none
 
