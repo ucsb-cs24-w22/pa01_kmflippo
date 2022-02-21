@@ -51,5 +51,8 @@ int main() {
 
     //test count
     cout << endl << "count: " << bst1.count() << endl;
+
+    //test operators
+    
     return 0;
 }
