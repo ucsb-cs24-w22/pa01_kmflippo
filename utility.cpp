@@ -5,65 +5,26 @@ using namespace std;
 
 VirtualCard::VirtualCard(string mySuit = "h", int myVal = 1) : suit(mySuit), value(myVal) { }
 
-string VirtualCard::getSuit() {
+VirtualCard::~VirtualCard(){ }
+
+string VirtualCard::getSuit() const{
     return suit;
 }
 
-int VirtualCard::getValue() {
+int VirtualCard::getValue() const{
     return value;
 }
 
-int convertSuit (string myS) {
+int VirtualCard::getSuitRank() const {
     int myIntSuit = 0;
-    if (myS == "c") {
+    if (suit == "c") {
         myIntSuit = 1;
-    } else if (myS == "d") {
+    } else if (suit == "d") {
         myIntSuit = 2;
-    } else if (myS == "s") {
+    } else if (suit == "s") {
         myIntSuit = 3;
-    } else if (myS == "h") {
+    } else if (suit == "h") {
         myIntSuit = 4;
     }
     return myIntSuit;
 }
-
-bool operator==(VirtualCard& first, VirtualCard& second) {
-    //compare suit
-    int firstSuitRank = convertSuit(first.getSuit());
-    int secondSuitRank = convertSuit(second.getSuit());
-
-    if (firstSuitRank == secondSuitRank) {
-        return true;
-    } else if (first.getValue() == second.getValue()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool operator<(VirtualCard& first, VirtualCard& second) {
-    int firstSuitRank = convertSuit(first.getSuit());
-    int secondSuitRank = convertSuit(second.getSuit());
-
-    if (firstSuitRank < secondSuitRank) {
-        return true;
-    } else if (first.getValue() < second.getValue()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool operator>(VirtualCard& first, VirtualCard& second) {
-    int firstSuitRank = convertSuit(first.getSuit());
-    int secondSuitRank = convertSuit(second.getSuit());
-
-    if (firstSuitRank > secondSuitRank) {
-        return true;
-    } else if (first.getValue() > second.getValue()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-

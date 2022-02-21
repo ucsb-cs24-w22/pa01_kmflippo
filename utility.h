@@ -10,8 +10,9 @@ class VirtualCard {
         VirtualCard(string mySuit, int myVal);  // overloaded constructor
         ~VirtualCard();                         // destructor
 
-        string getSuit();
-        int getValue();
+        string getSuit() const;
+        int getValue() const;
+        int getSuitRank() const;
 
         int convertSuit (string myS); // helper function for overloaded operators
         

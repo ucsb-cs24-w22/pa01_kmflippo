@@ -24,6 +24,42 @@ void CardBST::clear(Node *n) {
     }
 }
 
+
+bool operator==(const VirtualCard& first, const VirtualCard& second) {
+    //compare suit
+    if (first.getSuit() == second.getSuit() && first.getValue() == second.getValue()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool operator<(const VirtualCard& first, const VirtualCard& second) {
+    int firstSuitRank = first.getSuitRank();
+    int secondSuitRank = second.getSuitRank();
+
+    if (firstSuitRank < secondSuitRank) {
+        return true;
+    } else if (first.getValue() < second.getValue()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool operator>(const VirtualCard& first, const VirtualCard& second) {
+    int firstSuitRank = first.getSuitRank();
+    int secondSuitRank = second.getSuitRank();
+
+    if (firstSuitRank > secondSuitRank) {
+        return true;
+    } else if (first.getValue() > second.getValue()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // insert value in tree; return false if duplicate
 bool CardBST::insert(string mySuit, int myVal) {
     // handle special case of empty tree first
@@ -58,61 +94,6 @@ bool CardBST::insert(VirtualCard vCard, Node *n) {
 	    n->right->parent = n;
 	    return true;
 	}
-    }
-}
-
-// operator overload
-int convertSuit (string myS) {
-    int myIntSuit = 0;
-    if (myS == "c") {
-        myIntSuit = 1;
-    } else if (myS == "d") {
-        myIntSuit = 2;
-    } else if (myS == "s") {
-        myIntSuit = 3;
-    } else if (myS == "h") {
-        myIntSuit = 4;
-    }
-    return myIntSuit;
-}
-
-bool operator==(const VirtualCard& first, const VirtualCard& second) {
-    //compare suit
-    int firstSuitRank = convertSuit(first.getSuit());
-    int secondSuitRank = convertSuit(second.getSuit());
-
-    if (firstSuitRank == secondSuitRank) {
-        return true;
-    } else if (first.getValue() == second.getValue()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool operator<(const VirtualCard& first, const VirtualCard& second) {
-    int firstSuitRank = convertSuit(first.getSuit());
-    int secondSuitRank = convertSuit(second.getSuit());
-
-    if (firstSuitRank < secondSuitRank) {
-        return true;
-    } else if (first.getValue() < second.getValue()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool operator>(const VirtualCard& first, const VirtualCard& second) {
-    int firstSuitRank = convertSuit(first.getSuit());
-    int secondSuitRank = convertSuit(second.getSuit());
-
-    if (firstSuitRank > secondSuitRank) {
-        return true;
-    } else if (first.getValue() > second.getValue()) {
-        return true;
-    } else {
-        return false;
     }
 }
 
