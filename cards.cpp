@@ -40,9 +40,9 @@ bool CardBST::insert(string mySuit, int myVal) {
 // recursive helper for insert (assumes n is never 0)
 bool CardBST::insert(VirtualCard vCard, Node *n) {
     
-    if (vCard == n->info)
+    if (vCard == n->nCard)
 	    return false;
-    if (vCard < n->info) {
+    if (vCard < n->nCard) {
 	    if (n->left)
 	        return insert(vCard, n->left);
 	    else {
@@ -70,7 +70,7 @@ void CardBST::printPreOrder() const {
 // recursive helper for printPreOrder()
 void CardBST::printPreOrder(Node *n) const {
     if (n) {
-	cout << n->info << " ";
+	cout << n->nCard << " ";
 	printPreOrder(n->left);
 	printPreOrder(n->right);
     }
@@ -85,7 +85,7 @@ void CardBST::printInOrder(Node *n) const {
     // IMPLEMENT HERE
     if (n) {
         printInOrder(n->left);
-        cout << n->info << " ";
+        cout << n->nCard << " ";
         printInOrder(n->right);
     }
 }
@@ -100,7 +100,7 @@ void CardBST::printPostOrder(Node *n) const {
     if (n) {
         printPostOrder(n->left);
         printPostOrder(n->right);
-        cout << n->info << " ";
+        cout << n->nCard << " ";
     }
 }
 
@@ -139,12 +139,12 @@ CardBST::Node* CardBST::getNodeFor(VirtualCard vCard, Node* n) const{
 
 
     // basecase: at correct node
-    if (n->info == vCard){
+    if (n->nCard == vCard){
             return n;
     } 
     
     // case1 val < n
-    if (vCard < n->info){
+    if (vCard < n->nCard){
         return getNodeFor(vCard, n->left);
     } 
 
@@ -177,7 +177,7 @@ CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
         while (lefttest->left){
             lefttest = lefttest->left;
         } 
-        if (lefttest->info == vCard){
+        if (lefttest->nCard == vCard){
             return nullptr;
         }
     }
@@ -205,7 +205,7 @@ CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
     // case 3: no right child - up the ancestors until you find ancestor > value
     if (!valNode->left) {
         Node* temp = valNode->parent;
-        while (temp->info > vCard && temp != root) {
+        while (temp->nCard > vCard && temp != root) {
             temp = temp->parent;
         }
         return temp;
@@ -219,9 +219,10 @@ CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
 VirtualCard CardBST::getPredecessor(VirtualCard vCard) const{
     Node* n = getPredecessorNode(vCard);
     if (n == NULL) {
-        return 0;
+        VirtualCard newCard("0", 0);
+        return newCard;
     }
-    return n->info; 
+    return n->nCard; 
 }
 
 // returns the Node containing the successor of the given value
@@ -240,7 +241,7 @@ CardBST::Node* CardBST::getSuccessorNode(VirtualCard vCard) const{
     }
     
     if (farRight == valNode) {
-        return 0;
+        return nullptr;
     }
 
 
@@ -256,7 +257,7 @@ CardBST::Node* CardBST::getSuccessorNode(VirtualCard vCard) const{
     // case 3: no right child - up the ancestors until you find ancestor > value
     if (!valNode->right) {
         Node* temp = valNode->parent;
-        while (temp->info < vCard && temp != root) {
+        while (temp->nCard < vCard && temp != root) {
             temp = temp->parent;
         }
         return temp;
@@ -269,9 +270,10 @@ CardBST::Node* CardBST::getSuccessorNode(VirtualCard vCard) const{
 VirtualCard CardBST::getSuccessor(VirtualCard vCard) const{
     Node* n = getSuccessorNode(vCard);
     if (n == NULL){
-        return 0;
+        VirtualCard newCard("0", 0);
+        return newCard;
     }
-    return n->info;
+    return n->nCard;
 }
 
 // deletes the Node containing the given value from the tree
@@ -359,9 +361,9 @@ bool CardBST::remove(VirtualCard vCard){
         // getSuccessor, copy succ to node, then remove succ (recursive-ish call)
 
     if (valNode->left && valNode->right) {
-        Card succCard = getSuccessor(vCard);
+        VirtualCard succCard = getSuccessor(vCard);
         remove(succCard);
-        valNode->info = succCard;
+        valNode->nCard = succCard;
         return true;
     }
 
