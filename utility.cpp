@@ -10,36 +10,60 @@ string VirtualCard::getSuit() {
 }
 
 int VirtualCard::getValue() {
-    return val;
+    return value;
 }
 
-bool operator==(VirtualCard& first; VirtualCard& second) {
-    //compare suit
-    int firstSuitRank = 0;
-    int secondSuitRank = 0;
-    if (first.getSuit() == "c") {
-        firstSuitRank = 1;
-    } else if (first.getSuit() == "d") {
-        firstSuitRank = 2;
-    } else if (first.getSuit() == "s") {
-        firstSuitRank = 3;
-    } else if (first.getSuit() == "h") {
-        firstSuitRank = 4;
+int convertSuit (string myS) {
+    int myIntSuit = 0;
+    if (myS == "c") {
+        myIntSuit = 1;
+    } else if (myS == "d") {
+        myIntSuit = 2;
+    } else if (myS == "s") {
+        myIntSuit = 3;
+    } else if (myS == "h") {
+        myIntSuit = 4;
     }
+    return myIntSuit;
+}
 
-    if (second.getSuit() == "c") {
-        secondSuitRank = 1;
-    } else if (second.getSuit() == "d") {
-        secondSuitRank = 2;
-    } else if (second.getSuit() == "s") {
-        secondSuitRank = 3;
-    } else if (second.getSuit() == "h") {
-        secondSuitRank = 4;
-    }
+bool operator==(VirtualCard& first, VirtualCard& second) {
+    //compare suit
+    int firstSuitRank = convertSuit(first.getSuit());
+    int secondSuitRank = convertSuit(second.getSuit());
 
     if (firstSuitRank == secondSuitRank) {
+        return true;
+    } else if (first.getValue() == second.getValue()) {
         return true;
     } else {
         return false;
     }
 }
+
+bool operator<(VirtualCard& first, VirtualCard& second) {
+    int firstSuitRank = convertSuit(first.getSuit());
+    int secondSuitRank = convertSuit(second.getSuit());
+
+    if (firstSuitRank < secondSuitRank) {
+        return true;
+    } else if (first.getValue() < second.getValue()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool operator>(VirtualCard& first, VirtualCard& second) {
+    int firstSuitRank = convertSuit(first.getSuit());
+    int secondSuitRank = convertSuit(second.getSuit());
+
+    if (firstSuitRank > secondSuitRank) {
+        return true;
+    } else if (first.getValue() > second.getValue()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+

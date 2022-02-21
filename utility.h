@@ -12,11 +12,13 @@ class VirtualCard {
 
         string getSuit();
         int getValue();
-        
 
+        int convertSuit (string myS); // helper function for overloaded operators
+        
     private:
         string suit;
         int value;
+        
 };
 
 #endif

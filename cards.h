@@ -19,6 +19,10 @@ class CardBST {
         bool insert(string mySuit, int myVal);     // insert value; return false if duplicate
         void printPreOrder() const; //prints tree data pre-order to cout
 
+        friend bool operator==(const VirtualCard& first, const VirtualCard& second);
+        friend bool operator>(const VirtualCard& first, const VirtualCard& second);
+        friend bool operator>(const VirtualCard& first, const VirtualCard& second);
+
         void printInOrder() const; //print tree data in-order to cout
         void printPostOrder() const;     // print tree data post-order to cout
         int count() const;               // count of values
