@@ -24,6 +24,7 @@ class CardBST {
         friend bool operator>(const VirtualCard& first, const VirtualCard& second);
 
         int convertSuit(string myS);
+        string compare(VirtualCard first, VirtualCard second);
 
         void printInOrder() const; //print tree data in-order to cout
         void printPostOrder() const;     // print tree data post-order to cout

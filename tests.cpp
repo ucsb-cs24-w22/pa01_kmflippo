@@ -53,6 +53,9 @@ int main() {
     cout << endl << "count: " << bst1.count() << endl;
 
     //test operators
-    
+    VirtualCard card1("c", 8);
+    VirtualCard card2("h", 2);
+    cout << "compare c8 and h2 " << bst1.compare(card1, card2) << endl;
+
     return 0;
 }

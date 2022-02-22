@@ -40,7 +40,10 @@ bool operator<(const VirtualCard& first, const VirtualCard& second) {
 
     if (firstSuitRank < secondSuitRank) {
         return true;
-    } else if (first.getValue() < second.getValue()) {
+    } else if (firstSuitRank > secondSuitRank) {
+        return false;
+    }
+        else if (first.getValue() < second.getValue()) {
         return true;
     } else {
         return false;
@@ -53,10 +56,25 @@ bool operator>(const VirtualCard& first, const VirtualCard& second) {
 
     if (firstSuitRank > secondSuitRank) {
         return true;
-    } else if (first.getValue() > second.getValue()) {
+    } else if (firstSuitRank < secondSuitRank) {
+        return false;
+    } 
+    else if (first.getValue() > second.getValue()) {
         return true;
     } else {
         return false;
+    }
+}
+
+string CardBST::compare(VirtualCard first, VirtualCard second) {
+    if (first > second) {
+        return "card 1 is greater than card 2";
+    } else if (first < second) {
+        return "card 1 is less than card 2";
+    } else if (first == second) {
+        return "card 1 is equal to card 2";
+    } else {
+        return "there is a problem with the overloaded operators";
     }
 }
 
@@ -74,12 +92,13 @@ bool CardBST::insert(string mySuit, int myVal) {
 
 // recursive helper for insert (assumes n is never 0)
 bool CardBST::insert(VirtualCard vCard, Node *n) {
-    
-    if (vCard == n->nCard)
-	    return false;
+    if (vCard == n->nCard){
+         return false;
+    }
     if (vCard < n->nCard) {
-	    if (n->left)
-	        return insert(vCard, n->left);
+        if (n->left){
+            return insert(vCard, n->left);
+        }
 	    else {
 	        n->left = new Node(vCard.getSuit(), vCard.getValue());
 	        n->left->parent = n;
@@ -87,8 +106,9 @@ bool CardBST::insert(VirtualCard vCard, Node *n) {
 	    }
     }
     else {
-	if (n->right)
-	    return insert(vCard, n->right);
+	if (n->right){
+        return insert(vCard, n->right);
+    }
 	else {
 	    n->right = new Node(vCard.getSuit(), vCard.getValue());
 	    n->right->parent = n;
