@@ -273,7 +273,8 @@ CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
 
 // returns the predecessor value of the given value or 0 if there is none
 
-VirtualCard CardBST::getPredecessor(VirtualCard vCard) const{
+VirtualCard CardBST::getPredecessor(string mySuit, int myVal) const{
+    VirtualCard vCard(mySuit, myVal);
     Node* n = getPredecessorNode(vCard);
     if (n == NULL) {
         VirtualCard newCard("0", 0);
@@ -324,7 +325,8 @@ CardBST::Node* CardBST::getSuccessorNode(VirtualCard vCard) const{
 }
 
 // returns the successor value of the given value or 0 if there is none
-VirtualCard CardBST::getSuccessor(VirtualCard vCard) const{
+VirtualCard CardBST::getSuccessor(string mySuit, int myVal) const{
+    VirtualCard vCard(mySuit, myVal);
     Node* n = getSuccessorNode(vCard);
     if (n == NULL){
         VirtualCard newCard("0", 0);
@@ -418,7 +420,7 @@ bool CardBST::remove(string mySuit, int myVal){
         // getSuccessor, copy succ to node, then remove succ (recursive-ish call)
 
     if (valNode->left && valNode->right) {
-        VirtualCard succCard = getSuccessor(vCard);
+        VirtualCard succCard = getSuccessor(vCard.getSuit(), vCard.getValue());
         remove(succCard.getSuit(), succCard.getValue());
         valNode->nCard = succCard;
         return true;

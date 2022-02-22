@@ -31,10 +31,11 @@ class CardBST {
         int count() const;               // count of values
         bool contains(string mySuit, int myVal) const;  // true if value is in tree
 
-        VirtualCard getPredecessor(VirtualCard vCard) const;       // returns the predecessor value of the given value or 0 if there is none
-        VirtualCard getSuccessor(VirtualCard vCard) const;         // returns the successor value of the given value or 0 if there is none
+        VirtualCard getPredecessor(string mySuit, int myVal) const;       // returns the predecessor value of the given value or 0 if there is none
+        VirtualCard getSuccessor(string mySuit, int myVal) const;         // returns the successor value of the given value or 0 if there is none
         bool remove(string mySuit, int myVal);                    // deletes the Node containing the given value from the tree
         
+       
     private:
         struct Node {
             VirtualCard nCard;
@@ -52,10 +53,11 @@ class CardBST {
         void printInOrder(Node *n) const;
         void printPostOrder(Node *n) const;
         int count(Node *n) const;
-
-        // these should be used by getPredecessor and getSuccessor, and ONE of them should be used by remove
+        
         Node* getSuccessorNode(VirtualCard vCard) const;   // returns the Node containing the successor of the given value
         Node* getPredecessorNode(VirtualCard vCard) const; // returns the Node containing the predecessor of the given value
+
+        // these should be used by getPredecessor and getSuccessor, and ONE of them should be used by remove
     };
 
 

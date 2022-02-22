@@ -68,6 +68,23 @@ int main() {
         bst1.printPreOrder();
         cout << endl << endl;
 
+    // test predecessor and successor
+    cout << " predecessor of h2 " << bst1.getPredecessor("h", 2).getSuit() << 
+        bst1.getPredecessor("h", 2).getValue() << endl;
+    cout << " predecessor of c4 " << bst1.getPredecessor("c", 4).getSuit() << 
+        bst1.getPredecessor("c", 4).getValue() << endl;
+    cout << " predecessor of s10 " << bst1.getPredecessor("s", 10).getSuit() << 
+        bst1.getPredecessor("s", 10).getValue() << endl;
+
+    cout << " successor of h2 " << bst1.getSuccessor("h", 2).getSuit() << 
+        bst1.getSuccessor("h", 2).getValue() << endl;
+    cout << " successor of h6 " << bst1.getSuccessor("h", 6).getSuit() << 
+        bst1.getSuccessor("h", 6).getValue() << endl;
+    cout << " successor of c8 " << bst1.getSuccessor("c", 8).getSuit() << 
+        bst1.getSuccessor("c", 8).getValue() << endl;
+
+    cout << endl;
+    // test remove
     cout << "  removing c4" << endl;
 	bst1.remove("c", 4);
     cout << "  removing h2" << endl;
