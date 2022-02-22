@@ -7,7 +7,7 @@
 using namespace std;
 
 // returns if there is a matching VirtualCard
-bool hasMatch (VirtualCard firstCard, CardBST cardTree) {
+bool hasMatch (VirtualCard firstCard, CardBST& cardTree) {
   if (cardTree.contains(firstCard.getSuit(), firstCard.getValue())) {
     return true;
   } else {
@@ -79,18 +79,75 @@ int main(int argv, char** argc){
   // find Alice's final card
   VirtualCard currCardA = bstA.getMinCard();
   VirtualCard maxCardA = bstA.getMaxCard();
+  VirtualCard currCardB = bstB.getMaxCard();
+  VirtualCard emptyCard("0", 0);
+  bool aliceTurn = true;
+  int iterations = 0;
+  int origCount = bstA.count();
 
   // while Alice's curr card is != final card 
-  while (currCardA != maxCardA) {
+  bool operator==(const VirtualCard& first, const VirtualCard& second);
+  bool operator!=(const VirtualCard& first, const VirtualCard& second);
+
+
+  while (iterations <= origCount) {
+    cout << " has match : " << hasMatch(currCardA, bstB) << endl;
     // Alice iterates in order thru her cards
-  // if one of them has a match then the card is removed from
-  // Alice's BST and Bob's BST
+    // if one of them has a match then the card is removed from
+    // Alice's BST and Bob's BST
+    // while (aliceTurn == true) {
+      VirtualCard succCardA = bstA.getSuccessor(currCardA.getSuit(), currCardA.getValue());
+      iterations++;
+      if(hasMatch(currCardA, bstB)){
+        bstA.remove(currCardA.getSuit(), currCardA.getValue());
+        bstB.remove(currCardA.getSuit(), currCardA.getValue());
+        // iterate
+        currCardA = succCardA;
+        cout << "Alice picked matching card " << currCardA.getSuit() << " " << currCardA.getValStr() << endl;
+        aliceTurn = false;
+      } else if (succCardA != emptyCard) {
+        //iterate
+        currCardA = succCardA;
+      } else {
+        cout << "alice turn is false " << endl;
+        aliceTurn = false;
+        currCardA = maxCardA;
+      }
+    // }
    
 
-  // Bob iterates backwards thru his cards
-  // if one of them has a match then the card is removed from
-  // Alice and Bob's BSTs
+    // Bob iterates backwards thru his cards
+    // if one of them has a match then the card is removed from
+    // Alice and Bob's BSTs
+    cout << " has match : " << hasMatch(currCardB, bstA) << endl;
+    // while (aliceTurn == true) {
+      iterations++;
+      VirtualCard preCardB = bstB.getPredecessor(currCardB.getSuit(), currCardB.getValue());
+      if(hasMatch(currCardB, bstA)){
+        bstA.remove(currCardB.getSuit(), currCardB.getValue());
+        bstB.remove(currCardB.getSuit(), currCardB.getValue());
+        // iterate
+        currCardB = preCardB;
+        cout << "Bob picked matching card " << currCardB.getSuit() << " " << currCardB.getValStr() << endl;
+        aliceTurn = true;
+      } else if (preCardB != emptyCard) {
+        //iterate
+        currCardB = preCardB;
+      } else {
+        cout << "alice turn is false " << endl;
+        aliceTurn = true;
+        currCardA = maxCardA;
+      }
+    // }
+    
   }
+
+  cout << " Alice in order: ";
+        bstA.printInOrder();
+        cout << endl << endl;
+  cout << " Bob in order: ";
+        bstB.printInOrder();
+        cout << endl << endl;
   
   
   return 0;

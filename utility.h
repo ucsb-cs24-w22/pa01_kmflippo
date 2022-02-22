@@ -13,6 +13,7 @@ class VirtualCard {
         string getSuit() const;
         int getValue() const;
         int getSuitRank() const;
+        string getValStr() const;
 
         int convertSuit (string myS); // helper function for overloaded operators
         

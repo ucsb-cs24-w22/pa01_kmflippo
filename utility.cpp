@@ -28,3 +28,19 @@ int VirtualCard::getSuitRank() const {
     }
     return myIntSuit;
 }
+
+string VirtualCard::getValStr() const {
+    string myStr = "";
+    if (value == 1) {
+        myStr = "a";
+    } else if (value == 11) {
+        myStr = "j";
+    } else if (value == 12) {
+        myStr = "q";
+    } else if (value == 13) {
+        myStr = "k";
+    } else {
+        return to_string(value);
+    }
+    return myStr;
+}

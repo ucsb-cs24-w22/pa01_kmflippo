@@ -20,6 +20,7 @@ class CardBST {
         void printPreOrder() const; //prints tree data pre-order to cout
 
         friend bool operator==(const VirtualCard& first, const VirtualCard& second);
+        friend bool operator!=(const VirtualCard& first, const VirtualCard& second);
         friend bool operator<(const VirtualCard& first, const VirtualCard& second);
         friend bool operator>(const VirtualCard& first, const VirtualCard& second);
 

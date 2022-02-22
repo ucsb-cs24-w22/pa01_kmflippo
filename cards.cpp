@@ -34,6 +34,15 @@ bool operator==(const VirtualCard& first, const VirtualCard& second) {
     }
 }
 
+bool operator!=(const VirtualCard& first, const VirtualCard& second) {
+    //compare suit
+    if (first.getSuit() == second.getSuit() && first.getValue() == second.getValue()) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 bool operator<(const VirtualCard& first, const VirtualCard& second) {
     int firstSuitRank = first.getSuitRank();
     int secondSuitRank = second.getSuitRank();
