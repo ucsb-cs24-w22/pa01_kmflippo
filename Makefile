@@ -10,7 +10,6 @@ test: tests.o ${COMMON_OBJECT_FILES}
 
 game: main.o ${COMMON_OBJECT_FILES}
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
-	./game
 
 clean:
 	/bin/rm -f test *.o
