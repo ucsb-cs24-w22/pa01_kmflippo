@@ -6,6 +6,18 @@
 
 using namespace std;
 
+// returns if there is a matching VirtualCard
+bool hasMatch (VirtualCard firstCard, CardBST cardTree) {
+  if (cardTree.contains(firstCard.getSuit(), firstCard.getValue())) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// returns 
+
+
 int main(int argv, char** argc){
   if(argv < 3){
     cout << "Please provide 2 file names" << endl;
@@ -63,6 +75,22 @@ int main(int argv, char** argc){
     bstB.insert(mySuit, value);
   }
   cardFile2.close();
+
+  // find Alice's final card
+  VirtualCard currCardA = bstA.getMinCard();
+  VirtualCard maxCardA = bstA.getMaxCard();
+
+  // while Alice's curr card is != final card 
+  while (currCardA != maxCardA) {
+    // Alice iterates in order thru her cards
+  // if one of them has a match then the card is removed from
+  // Alice's BST and Bob's BST
+   
+
+  // Bob iterates backwards thru his cards
+  // if one of them has a match then the card is removed from
+  // Alice and Bob's BSTs
+  }
   
   
   return 0;

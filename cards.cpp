@@ -221,6 +221,30 @@ bool CardBST::contains(string mySuit, int myVal) const {
     return true;
 }
 
+// return minimum Card
+VirtualCard CardBST::getMinCard() {
+    Node* lefttest = root;
+    if (root->left){
+        lefttest = root->left;
+        while (lefttest->left){
+            lefttest = lefttest->left;
+        } 
+    }
+    return lefttest->nCard;
+}
+
+// return max Card
+VirtualCard CardBST::getMaxCard() {
+    Node* rightest = root;
+    if (root->right){
+        rightest = root->right;
+        while (rightest->right){
+            rightest = rightest->right;
+        } 
+    }
+    return rightest->nCard;
+}
+
 // returns the Node containing the predecessor of the given value
 CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
     // basecase root is null

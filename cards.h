@@ -25,6 +25,8 @@ class CardBST {
 
         int convertSuit(string myS);
         string compare(VirtualCard first, VirtualCard second);
+        VirtualCard getMinCard();
+        VirtualCard getMaxCard();
 
         void printInOrder() const; //print tree data in-order to cout
         void printPostOrder() const;     // print tree data post-order to cout
