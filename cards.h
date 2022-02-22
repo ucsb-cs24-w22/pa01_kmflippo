@@ -29,11 +29,11 @@ class CardBST {
         void printInOrder() const; //print tree data in-order to cout
         void printPostOrder() const;     // print tree data post-order to cout
         int count() const;               // count of values
-        bool contains(VirtualCard value) const;  // true if value is in tree
+        bool contains(string mySuit, int myVal) const;  // true if value is in tree
 
         VirtualCard getPredecessor(VirtualCard vCard) const;       // returns the predecessor value of the given value or 0 if there is none
         VirtualCard getSuccessor(VirtualCard vCard) const;         // returns the successor value of the given value or 0 if there is none
-        bool remove(VirtualCard vCard);                    // deletes the Node containing the given value from the tree
+        bool remove(string mySuit, int myVal);                    // deletes the Node containing the given value from the tree
         
     private:
         struct Node {

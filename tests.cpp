@@ -49,13 +49,48 @@ int main() {
     bst1.printPostOrder();
     cout << endl;
 
-    //test count
+    //test count, contains
     cout << endl << "count: " << bst1.count() << endl;
 
-    //test operators
-    VirtualCard card1("c", 8);
-    VirtualCard card2("h", 2);
-    cout << "compare c8 and h2 " << bst1.compare(card1, card2) << endl;
+    cout << "  contains h2? " <<
+            (bst1.contains("h", 2) ? "Y" : "N") << endl;
+	 cout << "  contains c8? " <<
+	    (bst1.contains("c", 8) ? "Y" : "N") << endl;
+        cout << "  contains d7? " <<
+            (bst1.contains("d", 7) ? "Y" : "N") << endl;
+        cout << "  contains d3? " <<
+            (bst1.contains("d", 3) ? "Y" : "N") << endl;
+        cout << "  contains s11? " <<
+            (bst1.contains("s", 11) ? "Y" : "N") << endl;
+        cout << "  contains c4? " <<
+            (bst1.contains("c", 4) ? "Y" : "N") << endl;
+	cout << "  pre-order: ";
+        bst1.printPreOrder();
+        cout << endl << endl;
+
+    cout << "  removing c4" << endl;
+	bst1.remove("c", 4);
+    cout << "  removing h2" << endl;
+	bst1.remove("h", 2);
+    cout << "  removing d7" << endl;
+	bst1.remove("d", 7);
+    cout << endl;
+    
+    cout << "  contains h2? " <<
+            (bst1.contains("h", 2) ? "Y" : "N") << endl;
+	 cout << "  contains c8? " <<
+	    (bst1.contains("c", 8) ? "Y" : "N") << endl;
+        cout << "  contains d7? " <<
+            (bst1.contains("d", 7) ? "Y" : "N") << endl;
+        cout << "  contains d3? " <<
+            (bst1.contains("d", 3) ? "Y" : "N") << endl;
+        cout << "  contains s11? " <<
+            (bst1.contains("s", 11) ? "Y" : "N") << endl;
+        cout << "  contains c4? " <<
+            (bst1.contains("c", 4) ? "Y" : "N") << endl;
+	cout << "  pre-order: ";
+        bst1.printPreOrder();
+        cout << endl << endl;
 
     return 0;
 }

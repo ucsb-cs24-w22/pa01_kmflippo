@@ -212,7 +212,8 @@ CardBST::Node* CardBST::getNodeFor(VirtualCard vCard, Node* n) const{
 }
 
 // returns true if value is in the tree; false if not
-bool CardBST::contains(VirtualCard vCard) const {
+bool CardBST::contains(string mySuit, int myVal) const {
+    VirtualCard vCard(mySuit, myVal);
     Node* valNode = getNodeFor(vCard, root);
     if (valNode == nullptr) {
         return false;
@@ -270,159 +271,159 @@ CardBST::Node* CardBST::getPredecessorNode(VirtualCard vCard) const{
     return nullptr;
 }
 
-// // returns the predecessor value of the given value or 0 if there is none
+// returns the predecessor value of the given value or 0 if there is none
 
-// VirtualCard CardBST::getPredecessor(VirtualCard vCard) const{
-//     Node* n = getPredecessorNode(vCard);
-//     if (n == NULL) {
-//         VirtualCard newCard("0", 0);
-//         return newCard;
-//     }
-//     return n->nCard; 
-// }
+VirtualCard CardBST::getPredecessor(VirtualCard vCard) const{
+    Node* n = getPredecessorNode(vCard);
+    if (n == NULL) {
+        VirtualCard newCard("0", 0);
+        return newCard;
+    }
+    return n->nCard; 
+}
 
-// // returns the Node containing the successor of the given value
-// CardBST::Node* CardBST::getSuccessorNode(VirtualCard vCard) const{
-//     // case 1: list empty
-//     if (!root){
-//         return NULL;
-//     }
+// returns the Node containing the successor of the given value
+CardBST::Node* CardBST::getSuccessorNode(VirtualCard vCard) const{
+    // case 1: list empty
+    if (!root){
+        return NULL;
+    }
 
-//     Node* valNode = getNodeFor(vCard, root);
+    Node* valNode = getNodeFor(vCard, root);
 
-//     // case 1.5: furthest right, return 0
-//     Node* farRight = root;
-//     while (farRight->right) {
-//         farRight = farRight->right;
-//     }
+    // case 1.5: furthest right, return 0
+    Node* farRight = root;
+    while (farRight->right) {
+        farRight = farRight->right;
+    }
     
-//     if (farRight == valNode) {
-//         return nullptr;
-//     }
+    if (farRight == valNode) {
+        return nullptr;
+    }
 
 
-//     // case 2: has right child - right tree leftmost
-//     if (valNode->right){
-//         Node* temp = valNode->right;
-//         while (temp->left){
-//             temp = temp->left;
-//         }
-//         return temp;
-//     }
+    // case 2: has right child - right tree leftmost
+    if (valNode->right){
+        Node* temp = valNode->right;
+        while (temp->left){
+            temp = temp->left;
+        }
+        return temp;
+    }
 
-//     // case 3: no right child - up the ancestors until you find ancestor > value
-//     if (!valNode->right) {
-//         Node* temp = valNode->parent;
-//         while (temp->nCard < vCard && temp != root) {
-//             temp = temp->parent;
-//         }
-//         return temp;
-//     }
+    // case 3: no right child - up the ancestors until you find ancestor > value
+    if (!valNode->right) {
+        Node* temp = valNode->parent;
+        while (temp->nCard < vCard && temp != root) {
+            temp = temp->parent;
+        }
+        return temp;
+    }
 
-//     return nullptr;
-// }
+    return nullptr;
+}
 
-// // returns the successor value of the given value or 0 if there is none
-// VirtualCard CardBST::getSuccessor(VirtualCard vCard) const{
-//     Node* n = getSuccessorNode(vCard);
-//     if (n == NULL){
-//         VirtualCard newCard("0", 0);
-//         return newCard;
-//     }
-//     return n->nCard;
-// }
+// returns the successor value of the given value or 0 if there is none
+VirtualCard CardBST::getSuccessor(VirtualCard vCard) const{
+    Node* n = getSuccessorNode(vCard);
+    if (n == NULL){
+        VirtualCard newCard("0", 0);
+        return newCard;
+    }
+    return n->nCard;
+}
 
-// // deletes the Node containing the given value from the tree
-// // returns true if the node exist and was deleted or false if the node does not exist
-// bool CardBST::remove(VirtualCard vCard){
-//     if (!root){
-//         return false;
-//     }
+// deletes the Node containing the given value from the tree
+// returns true if the node exist and was deleted or false if the node does not exist
+bool CardBST::remove(string mySuit, int myVal){
+    VirtualCard vCard(mySuit, myVal);
+    if (!root){
+        return false;
+    }
 
-//     Node* valNode = getNodeFor(vCard, root);
-//     if (!valNode){
-//         return false;
-//     }
+    Node* valNode = getNodeFor(vCard, root);
+    if (!valNode){
+        return false;
+    }
 
-//      // case 1: leaf node
-//         // go to parent (if possible), assign proper side with null, remove node
+     // case 1: leaf node
+        // go to parent (if possible), assign proper side with null, remove node
 
-//     if ((!valNode->left) && !(valNode->right)){
-//         if(valNode == root){
-//             root = nullptr;
-//             delete valNode;
-//             return true;
-//         }
-//         Node* vParent = valNode->parent;
-//         if (valNode == vParent->left){
-//             delete valNode;
-//             vParent->left = nullptr;
-//         }
-//         if (valNode == vParent->right){
-//             delete valNode;
-//             vParent->right = nullptr;
-//         }
+    if ((!valNode->left) && !(valNode->right)){
+        if(valNode == root){
+            root = nullptr;
+            delete valNode;
+            return true;
+        }
+        Node* vParent = valNode->parent;
+        if (valNode == vParent->left){
+            delete valNode;
+            vParent->left = nullptr;
+        }
+        if (valNode == vParent->right){
+            delete valNode;
+            vParent->right = nullptr;
+        }
        
-//         return true;
-//     }
+        return true;
+    }
 
-//     // case2: node with only one child
-//         // save parent and child, assign proper parent's side to child, remove node
+    // case2: node with only one child
+        // save parent and child, assign proper parent's side to child, remove node
 
-//     if (valNode->left == nullptr || valNode->right == nullptr) {
-//         Node* child;
-//         Node* grandparent;
-//         //is valnode the root
-//         if (valNode == root) {
-//             if (root->left == nullptr) {
-//                 root = root->right;
-//                 root->parent = nullptr;
-//                 valNode->right = nullptr;
-//                 delete valNode;
-//                 return true;
-//             } else {
-//                 root = root->left;
-//                 root->parent = nullptr;
-//                 valNode->left = nullptr;
-//                 delete valNode;
-//                 return true;
-//             }
-//         }
+    if (valNode->left == nullptr || valNode->right == nullptr) {
+        Node* child;
+        //is valnode the root
+        if (valNode == root) {
+            if (root->left == nullptr) {
+                root = root->right;
+                root->parent = nullptr;
+                valNode->right = nullptr;
+                delete valNode;
+                return true;
+            } else {
+                root = root->left;
+                root->parent = nullptr;
+                valNode->left = nullptr;
+                delete valNode;
+                return true;
+            }
+        }
         
-//         if (valNode->left == nullptr) {
-//             child = valNode->right;
-//         } else {
-//             child = valNode->left;
-//         }
+        if (valNode->left == nullptr) {
+            child = valNode->right;
+        } else {
+            child = valNode->left;
+        }
 
-//         // if valnode is the left child itself
-//         // set the left child of parent of valnode to be valnodes og child
-//         if (valNode == valNode->parent->left) {
-//             valNode->parent->left = child;
-//             child->parent = valNode->parent;
-//         } 
-//         else {
-//             valNode->parent->right = child;
-//             child->parent = valNode->parent;
-//         }
+        // if valnode is the left child itself
+        // set the left child of parent of valnode to be valnodes og child
+        if (valNode == valNode->parent->left) {
+            valNode->parent->left = child;
+            child->parent = valNode->parent;
+        } 
+        else {
+            valNode->parent->right = child;
+            child->parent = valNode->parent;
+        }
 
-//         valNode->right = nullptr;
-//         valNode->left = nullptr;
+        valNode->right = nullptr;
+        valNode->left = nullptr;
 
-//         delete valNode;
-//         return true;
-//     }
+        delete valNode;
+        return true;
+    }
 
-//     // case 3: node with two children
-//         // getSuccessor, copy succ to node, then remove succ (recursive-ish call)
+    // case 3: node with two children
+        // getSuccessor, copy succ to node, then remove succ (recursive-ish call)
 
-//     if (valNode->left && valNode->right) {
-//         VirtualCard succCard = getSuccessor(vCard);
-//         remove(succCard);
-//         valNode->nCard = succCard;
-//         return true;
-//     }
+    if (valNode->left && valNode->right) {
+        VirtualCard succCard = getSuccessor(vCard);
+        remove(succCard.getSuit(), succCard.getValue());
+        valNode->nCard = succCard;
+        return true;
+    }
 
-//     return false;
+    return false;
 
-// }
+}
