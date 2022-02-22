@@ -8,11 +8,9 @@ test: tests.o ${COMMON_OBJECT_FILES}
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
 	./test
 
-# game: main.o cards.o utility.o
-# 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
-# 	./game
-
-
+game: main.o ${COMMON_OBJECT_FILES}
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
+	./game
 
 clean:
 	/bin/rm -f test *.o
