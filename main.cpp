@@ -50,7 +50,7 @@ VirtualCard forwardTurn (CardBST& bst1, CardBST& bst2) {
 VirtualCard backwardTurn (CardBST& bst1, CardBST& bst2) {
   bool operator==(const VirtualCard& first, const VirtualCard& second);
   bool operator!=(const VirtualCard& first, const VirtualCard& second);
-  
+
   VirtualCard emptyCard("0", 0);
   VirtualCard currCard = bst1.getMaxCard();
   while (currCard != emptyCard) {
@@ -139,20 +139,22 @@ int main(int argv, char** argc){
       VirtualCard rCard = forwardTurn(bstA, bstB);
       bstA.remove(rCard.getSuit(), rCard.getValue());
       bstB.remove(rCard.getSuit(), rCard.getValue());
+      cout << "Alice picked matching card " << rCard.getSuit() << " " << rCard.getValStr() << endl;
     } else {
       // check backward
       VirtualCard rCard = backwardTurn(bstB, bstA);
       bstA.remove(rCard.getSuit(), rCard.getValue());
       bstB.remove(rCard.getSuit(), rCard.getValue());
+      cout << "Bob picked matching card " << rCard.getSuit() << " " << rCard.getValStr() << endl;
     }
   }
 
-  cout << " Alice in order: ";
+  cout << "Alice's cards: ";
         bstA.printInOrder();
-        cout << endl << endl;
-  cout << " Bob in order: ";
+        cout << endl;
+  cout << "Bob's cards: ";
         bstB.printInOrder();
-        cout << endl << endl;
+        cout << endl;
   
   
   return 0;

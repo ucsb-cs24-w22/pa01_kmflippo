@@ -150,7 +150,7 @@ void CardBST::printInOrder(Node *n) const {
     // IMPLEMENT HERE
     if (n) {
         printInOrder(n->left);
-        cout << n->nCard.getSuit() << n->nCard.getValue() << " ";
+        cout << n->nCard.getSuit() << " " << n->nCard.getValStr() << endl;
         printInOrder(n->right);
     }
 }
