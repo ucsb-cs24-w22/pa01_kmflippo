@@ -125,13 +125,6 @@ int main(int argv, char** argc){
 
   bool aliceTurn = true;
 
-  cout << " Alice in order: ";
-        bstA.printInOrder();
-        cout << endl << endl;
-  cout << " Bob in order: ";
-        bstB.printInOrder();
-        cout << endl << endl;
-
   // while there is at least one match
   while (treeMatch(bstA, bstB)) {
     if (aliceTurn) {
@@ -148,11 +141,12 @@ int main(int argv, char** argc){
       cout << "Bob picked matching card " << rCard.getSuit() << " " << rCard.getValStr() << endl;
     }
   }
+  cout << endl;
 
-  cout << "Alice's cards: ";
+  cout << "Alice's cards: " << endl;
         bstA.printInOrder();
         cout << endl;
-  cout << "Bob's cards: ";
+  cout << "Bob's cards: " << endl;
         bstB.printInOrder();
   
   
