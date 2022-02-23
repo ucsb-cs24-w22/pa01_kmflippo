@@ -154,7 +154,6 @@ int main(int argv, char** argc){
         cout << endl;
   cout << "Bob's cards: ";
         bstB.printInOrder();
-        cout << endl;
   
   
   return 0;
