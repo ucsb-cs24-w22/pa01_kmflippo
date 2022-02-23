@@ -15,8 +15,51 @@ bool hasMatch (VirtualCard firstCard, CardBST& cardTree) {
   }
 }
 
-// returns 
+// returns if the trees have at least one card in common
+bool treeMatch (CardBST& bst1, CardBST& bst2) {
+  bool operator==(const VirtualCard& first, const VirtualCard& second);
+  bool operator!=(const VirtualCard& first, const VirtualCard& second);
 
+  VirtualCard emptyCard("0", 0);
+  VirtualCard currCard = bst1.getMinCard();
+  while (currCard != emptyCard) {
+    if (hasMatch(currCard, bst2)) {
+      return true;
+    }
+    currCard = bst1.getSuccessor(currCard.getSuit(), currCard.getValue());
+  }
+  return false;
+}
+
+// check forwards
+VirtualCard forwardTurn (CardBST& bst1, CardBST& bst2) {
+  bool operator==(const VirtualCard& first, const VirtualCard& second);
+  bool operator!=(const VirtualCard& first, const VirtualCard& second);
+
+  VirtualCard emptyCard("0", 0);
+  VirtualCard currCard = bst1.getMinCard();
+  while (currCard != emptyCard) {
+    if (hasMatch(currCard, bst2)) {
+      return currCard;
+    }
+    currCard = bst1.getSuccessor(currCard.getSuit(), currCard.getValue());
+  }
+}
+
+// check backwards
+VirtualCard backwardTurn (CardBST& bst1, CardBST& bst2) {
+  bool operator==(const VirtualCard& first, const VirtualCard& second);
+  bool operator!=(const VirtualCard& first, const VirtualCard& second);
+  
+  VirtualCard emptyCard("0", 0);
+  VirtualCard currCard = bst1.getMaxCard();
+  while (currCard != emptyCard) {
+    if (hasMatch(currCard, bst2)) {
+      return currCard;
+    }
+    currCard = bst1.getPredecessor(currCard.getSuit(), currCard.getValue());
+  }
+}
 
 int main(int argv, char** argc){
   if(argv < 3){
@@ -76,66 +119,32 @@ int main(int argv, char** argc){
   }
   cardFile2.close();
 
-  // find Alice's final card
-  VirtualCard currCardA = bstA.getMinCard();
-  VirtualCard maxCardA = bstA.getMaxCard();
-  VirtualCard currCardB = bstB.getMaxCard();
-  VirtualCard emptyCard("0", 0);
-  bool aliceTurn = true;
-
-  // while Alice's curr card is != final card 
+  // declare boolean operators 
   bool operator==(const VirtualCard& first, const VirtualCard& second);
   bool operator!=(const VirtualCard& first, const VirtualCard& second);
 
+  bool aliceTurn = true;
 
-  while (succCardA != emptyCard || preCardB != emptyCard) {
-    cout << " has match : " << hasMatch(currCardA, bstB) << endl;
-    // Alice iterates in order thru her cards
-    // if one of them has a match then the card is removed from
-    // Alice's BST and Bob's BST
-    // while (aliceTurn == true) {
-      VirtualCard succCardA = bstA.getSuccessor(currCardA.getSuit(), currCardA.getValue());
-      if(hasMatch(currCardA, bstB)){
-        bstA.remove(currCardA.getSuit(), currCardA.getValue());
-        bstB.remove(currCardA.getSuit(), currCardA.getValue());
-        // iterate
-        currCardA = succCardA;
-        cout << "Alice picked matching card " << currCardA.getSuit() << " " << currCardA.getValStr() << endl;
-        aliceTurn = false;
-      } else if (succCardA != emptyCard) {
-        //iterate
-        currCardA = succCardA;
-      } else {
-        cout << "alice turn is false " << endl;
-        aliceTurn = false;
-        currCardA = maxCardA;
-      }
-    // }
-   
+  cout << " Alice in order: ";
+        bstA.printInOrder();
+        cout << endl << endl;
+  cout << " Bob in order: ";
+        bstB.printInOrder();
+        cout << endl << endl;
 
-    // Bob iterates backwards thru his cards
-    // if one of them has a match then the card is removed from
-    // Alice and Bob's BSTs
-    cout << " has match : " << hasMatch(currCardB, bstA) << endl;
-    // while (aliceTurn == true) {
-      VirtualCard preCardB = bstB.getPredecessor(currCardB.getSuit(), currCardB.getValue());
-      if(hasMatch(currCardB, bstA)){
-        bstA.remove(currCardB.getSuit(), currCardB.getValue());
-        bstB.remove(currCardB.getSuit(), currCardB.getValue());
-        // iterate
-        currCardB = preCardB;
-        cout << "Bob picked matching card " << currCardB.getSuit() << " " << currCardB.getValStr() << endl;
-        aliceTurn = true;
-      } else if (preCardB != emptyCard) {
-        //iterate
-        currCardB = preCardB;
-      } else {
-        cout << "alice turn is false " << endl;
-        aliceTurn = true;
-        currCardA = maxCardA;
-      }
-    // }
-    
+  // while there is at least one match
+  while (treeMatch(bstA, bstB)) {
+    if (aliceTurn) {
+      // check forward
+      VirtualCard rCard = forwardTurn(bstA, bstB);
+      bstA.remove(rCard.getSuit(), rCard.getValue());
+      bstB.remove(rCard.getSuit(), rCard.getValue());
+    } else {
+      // check backward
+      VirtualCard rCard = backwardTurn(bstB, bstA);
+      bstA.remove(rCard.getSuit(), rCard.getValue());
+      bstB.remove(rCard.getSuit(), rCard.getValue());
+    }
   }
 
   cout << " Alice in order: ";

@@ -12,4 +12,4 @@ game: main.o ${COMMON_OBJECT_FILES}
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
 
 clean:
-	/bin/rm -f test game *.o
+	/bin/rm -f test game main *.o
