@@ -82,22 +82,19 @@ int main(int argv, char** argc){
   VirtualCard currCardB = bstB.getMaxCard();
   VirtualCard emptyCard("0", 0);
   bool aliceTurn = true;
-  int iterations = 0;
-  int origCount = bstA.count();
 
   // while Alice's curr card is != final card 
   bool operator==(const VirtualCard& first, const VirtualCard& second);
   bool operator!=(const VirtualCard& first, const VirtualCard& second);
 
 
-  while (iterations <= origCount) {
+  while (succCardA != emptyCard || preCardB != emptyCard) {
     cout << " has match : " << hasMatch(currCardA, bstB) << endl;
     // Alice iterates in order thru her cards
     // if one of them has a match then the card is removed from
     // Alice's BST and Bob's BST
     // while (aliceTurn == true) {
       VirtualCard succCardA = bstA.getSuccessor(currCardA.getSuit(), currCardA.getValue());
-      iterations++;
       if(hasMatch(currCardA, bstB)){
         bstA.remove(currCardA.getSuit(), currCardA.getValue());
         bstB.remove(currCardA.getSuit(), currCardA.getValue());
@@ -121,7 +118,6 @@ int main(int argv, char** argc){
     // Alice and Bob's BSTs
     cout << " has match : " << hasMatch(currCardB, bstA) << endl;
     // while (aliceTurn == true) {
-      iterations++;
       VirtualCard preCardB = bstB.getPredecessor(currCardB.getSuit(), currCardB.getValue());
       if(hasMatch(currCardB, bstA)){
         bstA.remove(currCardB.getSuit(), currCardB.getValue());
