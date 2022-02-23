@@ -133,12 +133,14 @@ int main(int argv, char** argc){
       bstA.remove(rCard.getSuit(), rCard.getValue());
       bstB.remove(rCard.getSuit(), rCard.getValue());
       cout << "Alice picked matching card " << rCard.getSuit() << " " << rCard.getValStr() << endl;
+      aliceTurn = false;
     } else {
       // check backward
       VirtualCard rCard = backwardTurn(bstB, bstA);
       bstA.remove(rCard.getSuit(), rCard.getValue());
       bstB.remove(rCard.getSuit(), rCard.getValue());
       cout << "Bob picked matching card " << rCard.getSuit() << " " << rCard.getValStr() << endl;
+      aliceTurn = true;
     }
   }
   cout << endl;
